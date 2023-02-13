@@ -1,0 +1,24 @@
+import { useEffect  } from "react";
+import { useSelector,useDispatch } from "react-redux";
+import { fetchItems } from "./reduxToolkit/userSlice";
+
+function App() {
+  const isLoading = useSelector(state=>state.users.isLoading)
+  const users = useSelector(state=>state.users.users)
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    dispatch(fetchItems())    
+  },[dispatch])
+  return (
+    <div className="App">
+    <h1 className="text-gray-800 font-bold text-center text-9xl font-montserrat"> hellow world</h1>
+      {isLoading ? users.map(use=>
+      <div>
+        <h1>{use.name}</h1>
+      </div>
+    ):<p className='text-gray-600 font-bold text-center text-5xl font-montserrat'>loading</p>}  
+    </div>
+  );
+}
+
+export default App;
